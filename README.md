@@ -1,70 +1,115 @@
-# Getting Started with Create React App
+Skill Exchange Platform
+Overview
+Skill Exchange is a full-stack web application designed to enable users to exchange skills through peer-to-peer matching. The project showcases modern software development practices using Spring Boot for the backend and React for the frontend, with secure JWT-based authentication and real-time messaging features.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project also includes gamification elements, with multiple games accessible via a sidebar after login.
 
-## Available Scripts
+Features
+User registration and login with JWT authentication
 
-In the project directory, you can run:
+User profile management
 
-### `npm start`
+Skill management: add, list, and delete skills
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Skill exchange requests: send, receive, accept, and reject requests
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Real-time messaging system between users
 
-### `npm test`
+Games section accessible from sidebar with multiple games
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Responsive and user-friendly UI using Material-UI
 
-### `npm run build`
+Secure backend with Spring Security and JWT
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+RESTful APIs with error handling and validation
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+CORS configuration for frontend-backend communication
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Technologies Used
+Backend: Java 21, Spring Boot 3.5.7, Spring Security, JWT, Spring Data JPA, MySQL, Lombok, ModelMapper, WebSocket
 
-### `npm run eject`
+Frontend: React, React Router v6, Material-UI, Axios
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Build Tools: Maven (backend), npm/yarn (frontend)
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Getting Started
+Prerequisites
+Java 21 or higher
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Maven 3.x
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Node.js 16+
 
-## Learn More
+MySQL server running locally (or accessible remotely)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+IDE or code editor of choice
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Backend Setup
+Clone this repository.
 
-### Code Splitting
+Configure MySQL database and update application.properties with your DB credentials.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Ensure tables and roles are created automatically by Hibernate (spring.jpa.hibernate.ddl-auto=update).
 
-### Analyzing the Bundle Size
+Run the backend Spring Boot application:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+bash
+mvn clean install
+mvn spring-boot:run
+The backend runs on http://localhost:8080.
 
-### Making a Progressive Web App
+Frontend Setup
+Navigate to the frontend directory:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+bash
+cd skill-exchange-frontend
+Install dependencies:
 
-### Advanced Configuration
+bash
+npm install
+Start the React development server:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+bash
+npm start
+The frontend runs on http://localhost:3000 and communicates with the backend.
 
-### Deployment
+Project Structure
+backend/ - Spring Boot REST APIs, security, database entities, services
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+frontend/ - React SPA, API integration, UI components, routing
 
-### `npm run build` fails to minify
+api/ - Axios API calls
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+auth/ - Authentication pages (login/register)
+
+dashboard/ - User dashboard and skill management
+
+match/ - Skill exchange request UI
+
+message/ - Real-time messaging UI
+
+context/ - React auth state management
+
+utils/ - API client and helpers
+
+Usage
+Register a new user and login.
+
+Manage your skills from the dashboard.
+
+Send and respond to skill exchange requests.
+
+Chat with matched users.
+
+Access games from the sidebar menu.
+
+Known Issues & Enhancements
+Add more robust error handling and validations.
+
+Improve game implementations.
+
+Add user search and skill search features.
+
+Support file uploads for profile images.
+
+Enhance UI with animations and accessibility improvements.
