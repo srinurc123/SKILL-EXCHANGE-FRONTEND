@@ -1,5 +1,18 @@
+/* src/App.css */
+
 .App {
   text-align: center;
+}
+
+body, html, #root {
+  height: 100%;
+  margin: 0;
+  /* REMOVED: background-image: url('skill.png'); */
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  background-attachment: fixed;
+  font-family: 'Roboto', sans-serif;
 }
 
 .App-logo {
