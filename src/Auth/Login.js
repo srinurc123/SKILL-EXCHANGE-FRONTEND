@@ -1,14 +1,8 @@
-// src/Auth/Login.js
 import React, { useState, useContext } from "react";
 import {
-  Container,
-  Box,
-  TextField,
-  Button,
-  Typography,
-  Alert,
-  Link,
+  Container, Box, TextField, Button, Typography, Alert, Link, InputAdornment, IconButton, AppBar, Toolbar
 } from "@mui/material";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { loginUser } from "../api/authApi";
 import { AuthContext } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
@@ -16,6 +10,7 @@ import { useNavigate } from "react-router-dom";
 export default function Login() {
   const [formData, setFormData] = useState({ username: "", password: "" });
   const [error, setError] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const { setToken } = useContext(AuthContext);
   const navigate = useNavigate();
 
@@ -30,71 +25,140 @@ export default function Login() {
       setToken(res.data.token);
       navigate("/dashboard");
     } catch (err) {
-      setError(
-        err.response?.data || "Login failed. Please check your credentials."
-      );
+      setError(err.response?.data || "Login failed. Please check your credentials.");
     }
   };
 
+  const togglePasswordVisibility = () => setShowPassword(!showPassword);
+
   return (
-    // The Container's maxWidth="xs" still limits the width of the card
-    <Container maxWidth="xs" sx={{ zIndex: 2, position: 'relative' }}> {/* zIndex to bring card above overlay */}
+    <Box sx={{ minHeight: "100vh", display: "flex", flexDirection: "column" }}>
+      {/* Top Header with Project Name */}
+      <AppBar position="static" sx={{ bgcolor: "#63b0b7d6" }}>
+        <Toolbar sx={{ justifyContent: "center" }}>
+          <Typography variant="h4" fontWeight="700" sx={{ fontFamily: "Poppins, sans-serif" }}>
+            Skill Exchange Platform
+          </Typography>
+        </Toolbar>
+      </AppBar>
+
+      {/* Main Content - Centered Login Form */}
+      <Box sx={{ display: "flex", alignItems: "center", justifyContent: "center", flex: 1 }}>
+        <Container maxWidth="xs">
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              p: 4,
+              boxShadow: 6,
+              borderRadius: 3,
+              bgcolor: "white",
+            }}
+          >
+            <Typography component="h1" variant="h4" mb={1} fontWeight="600" color="primary">
+              Welcome Back
+            </Typography>
+            <Typography variant="body2" color="text.secondary" mb={3}>
+              Sign in to continue to Skill Exchange
+            </Typography>
+
+            {error && (
+              <Alert severity="error" sx={{ width: "100%", mb: 2 }}>
+                {error}
+              </Alert>
+            )}
+
+            <Box component="form" onSubmit={handleSubmit} sx={{ width: "100%" }}>
+              <TextField
+                margin="normal"
+                fullWidth
+                label="Username"
+                name="username"
+                value={formData.username}
+                onChange={handleChange}
+                required
+              />
+              <TextField
+                margin="normal"
+                fullWidth
+                label="Password"
+                type={showPassword ? "text" : "password"}
+                name="password"
+                value={formData.password}
+                onChange={handleChange}
+                required
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <IconButton onClick={togglePasswordVisibility} edge="end">
+                        {showPassword ? <VisibilityOff /> : <Visibility />}
+                      </IconButton>
+                    </InputAdornment>
+                  ),
+                }}
+              />
+              <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2, py: 1.2 }}>
+                Sign In
+              </Button>
+              <Typography variant="body2" align="center">
+                Don't have an account?{" "}
+                <Link href="/register" underline="hover">
+                  Sign Up
+                </Link>
+              </Typography>
+            </Box>
+          </Box>
+        </Container>
+      </Box>
+
+      {/* Footer Section */}
       <Box
         sx={{
-          // mt: 8, // REMOVED: No longer needed for vertical centering, parent Box handles it
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          p: 4,
-          boxShadow: 3,
-          borderRadius: 2,
-          bgcolor: 'white', // ADDED: Set background color to white
+          width: "100%",
+          bgcolor: "rgba(0, 0, 0, 0.8)",
+          color: "white",
+          py: 3,
+          px: 4,
         }}
       >
-        <Typography component="h1" variant="h5" mb={2}>
-          Sign in
-        </Typography>
-        {error && (
-          <Alert severity="error" sx={{ width: "100%", mb: 2 }}>
-            {error}
-          </Alert>
-        )}
-        <Box component="form" onSubmit={handleSubmit} sx={{ width: "100%" }}>
-          <TextField
-            margin="normal"
-            fullWidth
-            label="Username"
-            name="username"
-            value={formData.username}
-            onChange={handleChange}
-            required
-          />
-          <TextField
-            margin="normal"
-            fullWidth
-            label="Password"
-            type="password"
-            name="password"
-            value={formData.password}
-            onChange={handleChange}
-            required
-          />
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            sx={{ mt: 3, mb: 2 }}
-          >
-            Sign In
-          </Button>
-          <Typography variant="body2" align="center">
-            Don't have an account?{" "}
-            <Link href="/register" underline="hover">
-              Sign Up
-            </Link>
+        <Container maxWidth="lg">
+          <Box sx={{ display: "flex", flexDirection: { xs: "column", md: "row" }, justifyContent: "space-between", gap: 3 }}>
+            {/* About Project */}
+            <Box sx={{ flex: 1 }}>
+              <Typography variant="h6" fontWeight="600" mb={1} sx={{ fontFamily: "Poppins, sans-serif" }}>
+                About Skill Exchange
+              </Typography>
+              <Typography variant="body2" sx={{ lineHeight: 1.8 }}>
+                Skill Exchange is a peer-to-peer platform where users can offer their skills and learn from others.
+                Match with people who have complementary skills, exchange knowledge, and grow together. Whether you're
+                teaching or learning, our platform connects you with the right people to advance your journey.
+              </Typography>
+            </Box>
+
+            {/* Contact Info */}
+            <Box sx={{ flex: 1 }}>
+              <Typography variant="h6" fontWeight="600" mb={1} sx={{ fontFamily: "Poppins, sans-serif" }}>
+                Contact Us
+              </Typography>
+              <Typography variant="body2" sx={{ lineHeight: 1.8 }}>
+                📧 Email: <Link href="mailto:srinuvalasani5@gmail.com" color="inherit" underline="hover">support@skillexchange.com</Link>
+              </Typography>
+              <Typography variant="body2" sx={{ lineHeight: 1.8 }}>
+                📞 Phone: +91 7893855952
+              </Typography>
+              <Typography variant="body2" sx={{ lineHeight: 1.8 }}>
+                📍 Location: Hyderabad, Telangana, India
+              </Typography>
+            </Box>
+          </Box>
+
+          {/* Copyright */}
+          <Typography variant="body2" align="center" sx={{ mt: 3, fontFamily: "Poppins, sans-serif" }}>
+            © 2025 Skill Exchange Platform. All rights reserved.
           </Typography>
-        </Box>
+        </Container>
       </Box>
-    </Container>
+    </Box>
   );
 }
