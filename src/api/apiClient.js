@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const apiClient = axios.create({
-  baseURL: "http://localhost:8080/api",
+  baseURL: "https://skill-exchange-backend-production.up.railway.app/api",
   headers: {
     "Content-Type": "application/json",
   },
