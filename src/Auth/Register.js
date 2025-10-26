@@ -189,7 +189,7 @@ export default function Register() {
                 Contact Us
               </Typography>
               <Typography variant="body2" sx={{ lineHeight: 1.8 }}>
-                📧 Email: <Link href="mailto:srinuvalasani5@gmail.com" color="inherit" underline="hover">support@skillexchange.com</Link>
+                📧 Email: <Link href="mailto:srinuvalasani5@gmail.com" color="inherit" underline="hover">srinuvalasani5@gmail.com</Link>
               </Typography>
               <Typography variant="body2" sx={{ lineHeight: 1.8 }}>
                 📞 Phone: +91 7893855952
